@@ -1,38 +1,154 @@
-.App {
-  text-align: center;
+:root {
+  --primary-bg-color: #fff;
+  --primary-text-color: #333;
+  --input-bg-color: #fff;
+  --input-text-color: #333;
+  --input-border-color: #ccc;
+  --error-bg-color: #ffe6e6;
+  --error-border-color: #ff4d4d;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Dark Theme */
+body[data-theme="dark"] {
+  --primary-bg-color: #333;
+  --primary-text-color: #fff;
+  --input-bg-color: #444;
+  --input-text-color: #fff;
+  --input-border-color: #555;
+  --error-bg-color: #ff4d4d;
+  --error-border-color: #ff6666;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+
+/* Body - Fullscreen Centering */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Container for Board and Controls */
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+/* Title */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Sudoku Board */
+.board {
+  display: grid;
+  /* grid-template-rows: repeat(9, 1fr); */
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+  background-color: #333;
+  border: 3px solid #333;
+  margin-bottom: 20px;
+}
+
+/* Input Cells */
+input {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  outline: none;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  border: 1px solid var(--input-border-color);
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+/* Sub-grid Borders */
+input:nth-child(3n) {
+  border-right: 3px solid #333;
+}
+
+input:nth-of-type(-n+9) {
+  border-top: 3px solid #333;
+}
+
+input:nth-child(1):nth-last-child(-n+9) {
+  border-bottom: 3px solid #333;
+}
+/* 
+input:nth-child(1):nth-of-type(3n+1) {
+  border-left: 3px solid #333;
+} */
+
+/* Hover and Focus Effects */
+input:hover {
+  background-color: #f0f8ff;
+  cursor: pointer;
+}
+
+input:focus {
+  background-color: #e7f3ff;
+  box-shadow: 0 0 10px #007bff;
+}
+
+/* Buttons */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s ease, transform 0.1s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  input {
+    height: 30px;
+    font-size: 16px;
   }
-  to {
-    transform: rotate(360deg);
+
+  button {
+    font-size: 14px;
+    padding: 8px 12px;
   }
+}
+
+input[data-error="true"] {
+  background-color: var(--error-bg-color);
+  border-color: var(--error-border-color);
 }
