@@ -10,7 +10,7 @@ const Game: React.FC = () => {
   );
   const [puzzleBoard, setPuzzleBoard] = useState<CellValue[][]>(() =>
     generatePuzzle(solvedBoard, 30)
-  ); // 30 clues
+  );
   const [userBoard, setUserBoard] = useState<CellValue[][]>(() =>
     JSON.parse(JSON.stringify(puzzleBoard))
   );
